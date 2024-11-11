@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaFolder, FaFileAlt } from 'react-icons/fa';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './FileGrid.css';
 
 interface FileItem {
@@ -9,37 +10,58 @@ interface FileItem {
 
 const FileGrid: React.FC = () => {
     const [files, setFiles] = useState<FileItem[]>([]);
-    // Fetch the list of files from the backend when the component mounts
-    useEffect(() => {
-        const fetchFiles = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/files');
-                const fileNames = await response.text();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-                // Split the file names by newline
-                const fileItems = fileNames.split('\n').map(name => {
-                    // Add your logic here to differentiate between folders and files
-                    // For now, let's assume everything is a file unless we can determine it's a folder
-                    const type: 'folder' | 'file' = name.toLowerCase().includes('folder') ? 'folder' : 'file';
-                    return { name, type };
-                });
-                console.log("fileItems = ", fileItems)
+    // Extract the current folder from the URL path
+    const currentFolder = location.pathname.split('/').filter(Boolean).join('/');
 
-                setFiles(fileItems);
-            } catch (error) {
-                console.error('Error fetching files:', error);
+    // Function to fetch files from the backend
+    const fetchFiles = async (folder: string = '') => {
+        try {
+            const url = folder ? `http://localhost:8080/files/${folder}` : 'http://localhost:8080/files'; // Handle subfolder
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to fetch files');
             }
-        };
+            const fileItems: FileItem[] = await response.json();
+            setFiles(fileItems);
+        } catch (error: any) {
+            console.error('Error fetching files:', error);
+        }
+    };
 
-        fetchFiles();
-    }, []);
+    // Fetch files when component mounts or when the current folder changes
+    useEffect(() => {
+        fetchFiles(currentFolder);
+    }, [currentFolder]); // Dependency on `currentFolder`
+
+    // Handle folder click and update the URL
+    const handleFolderClick = (folderName: string) => {
+        const newPath = currentFolder ? `${currentFolder}/${folderName}` : folderName;
+        navigate(`/${newPath}`); // Update the URL to reflect the clicked folder
+    };
+
+    // Handle going back to the parent directory
+    const handleGoBack = () => {
+        const parentFolder = currentFolder.substring(0, currentFolder.lastIndexOf('/')); // Get the parent folder
+        navigate(`/${parentFolder || ''}`); // If no parent, go to the root
+    };
 
     return (
         <div className="file-grid">
+            {currentFolder && (
+                <button onClick={handleGoBack} className="back-button">
+                    Go Back
+                </button>
+            )}
             {files.map((file, index) => (
                 <div className="file-item" key={index}>
                     {file.type === 'folder' ? (
-                        <FaFolder className="file-icon" />
+                        <FaFolder
+                            className="file-icon"
+                            onClick={() => handleFolderClick(file.name)} // Open folder contents on click
+                        />
                     ) : (
                         <FaFileAlt className="file-icon" />
                     )}

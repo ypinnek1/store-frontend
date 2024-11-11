@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { FaSearch, FaPlus } from 'react-icons/fa';
+import { FaSearch, FaFile, FaFolder } from 'react-icons/fa';
 import FileUpload from './FileUpload'
+import CreateFolder from './CreateFolder'
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -16,6 +17,12 @@ const Header: React.FC = () => {
         setIsModalOpen(true);  // Open the modal
     };
 
+    const [isFolderModalOpen, setIsFolderModalOpen] = useState<boolean>(false);
+
+    const openFolderModal = () => setIsFolderModalOpen(true);
+
+    const closeFolderModal = () => setIsFolderModalOpen(false);
+
     return (
         <div className="header">
             <div className="header-left">
@@ -25,9 +32,13 @@ const Header: React.FC = () => {
                     <input type="text" placeholder="Search in Drive" />
                 </div>
             </div>
-            <div className="header-right">
-                <button onClick={handleNewClick} className="new-button"><FaPlus /> New</button>
+            <div className="header-right pr-10">
+                <button onClick={handleNewClick} className="new-button"><FaFile /> New File</button>
                 <FileUpload closeModal={closeModal} isModalOpen={isModalOpen} />
+            </div>
+            <div className="header-right">
+                <button onClick={openFolderModal} className="new-button"><FaFolder /> New Folder</button>
+                <CreateFolder isFolderModalOpen={isFolderModalOpen} closeFolderModal={closeFolderModal} />
             </div>
         </div>
     );

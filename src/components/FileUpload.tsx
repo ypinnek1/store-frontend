@@ -27,7 +27,13 @@ const FileUpload: React.FC<FileUploadProps> = ({closeModal, isModalOpen}) => {
       // Create a FormData object to send the file
       const formData = new FormData();
       formData.append('file', file);  // 'file' is the name of the field expected by the backend
-  
+      const path = window.location.pathname;
+
+        // Extract the part after the port number (ignoring the leading '/')
+        const pathParts = path.split('/').filter(Boolean);
+
+      formData.append("folder", pathParts[0]);
+
       try {
         // Send the FormData to the backend using fetch
         const response = await fetch('http://localhost:8080/upload', {

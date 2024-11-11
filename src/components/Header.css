@@ -34,6 +34,10 @@
     margin-right: 30px;
 }
 
+.pr-10 {
+    padding-right: 10px;
+}
+
 .search-container input {
     border: none;
     outline: none;

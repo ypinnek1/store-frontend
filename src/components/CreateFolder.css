@@ -1,0 +1,58 @@
+/* modal-overlay covers the entire screen */
+.modal-overlay {
+    position: fixed; /* fixed to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* full width of the screen */
+    height: 100%; /* full height of the screen */
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+    display: flex; /* Use flex to center modal content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensure modal is on top */
+    visibility: visible; /* Ensure it's visible */
+    opacity: 1; /* Full opacity */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+  }
+  
+  /* modal-content for styling the modal box */
+  .modal-overlay .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px; /* Adjust the width as needed */
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow to make it pop */
+  }
+  
+  /* Style for buttons */
+  button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px; /* Space between buttons */
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:last-child {
+    background-color: #e53935;
+    margin-top: 10px;
+  }
+  
+  button:last-child:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Style input field */
+  input {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px; /* Space between input and button */
+  }
+  
