@@ -1,32 +1,36 @@
-.file-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.file-item {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
 .file-item:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+}
+
+.file-item {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    overflow: hidden; /* Ensure text doesn't overflow out of the container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Set a fixed height for the file item */
+}
+
 .file-icon {
-    font-size: 36px;
-    color: #1a73e8;
+    font-size: 30px;
+    margin-bottom: 8px;
 }
 
 .file-item p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #202124;
+    margin: 0;
+    word-wrap: break-word; /* Ensures long words wrap */
+    overflow-wrap: break-word; /* Same as word-wrap but for better compatibility */
+    text-overflow: ellipsis; /* Truncates text with ellipsis when it overflows */
+    white-space: nowrap; /* Prevents text from wrapping into multiple lines */
+    max-width: 100%; /* Ensures it doesn't overflow the container */
 }
