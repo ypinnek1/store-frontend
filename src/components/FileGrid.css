@@ -36,14 +36,14 @@
 
 .back-button {
     padding: 0.5rem 1rem;
-    background-color: #f0f0f0;
+    background-color: lightgrey;
     border: none;
     cursor: pointer;
     margin-bottom: 1rem;
 }
 
 .back-button:hover {
-    background-color: #e0e0e0;
+    background-color: grey;
 }
 
 .download-icon {

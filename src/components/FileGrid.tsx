@@ -9,18 +9,18 @@ interface FileItem {
     type: 'folder' | 'file'; // Type is either 'folder' or 'file'
 }
 
-const FileGrid: React.FC = () => {
+const FileGrid: React.FC = ({sidebarSelection}: any) => {
     const [files, setFiles] = useState<FileItem[]>([]);
     const location = useLocation();
     const navigate = useNavigate();
-
+console.log(sidebarSelection)
     // Extract the current folder from the URL path
     const currentFolder = location.pathname.split('/').filter(Boolean).join('/');
 
     // Function to fetch files from the backend
     const fetchFiles = async (folder: string = '') => {
         try {
-            const url = folder ? `http://localhost:8080/files/${folder}` : 'http://localhost:8080/files'; // Handle subfolder
+            const url = folder ? `http://localhost:8080/files/${folder}?sortByDate=true` : 'http://localhost:8080/files?sortByDate=true'; // Handle subfolder
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error('Failed to fetch files');
