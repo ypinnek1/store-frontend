@@ -30,8 +30,9 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ isOpen, onClose }
       if (response.ok) {
         setMessage(`Folder "${folderName}" created successfully`);
         setFolderName(''); // Reset folder name after success
+        onClose();
       } else {
-        setMessage('Failed to create folder');
+        setMessage(`Failed to create folder, ${response}`);
       }
     } catch (error) {
       console.error('Error creating folder:', error);
