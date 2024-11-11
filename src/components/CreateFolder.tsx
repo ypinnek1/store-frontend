@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./CreateFolder.css"
+import './CreateFolder.css';
 
 interface CreateFolderModalProps {
   isOpen: boolean;

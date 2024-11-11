@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch, FaFile, FaFolder, FaDownload } from 'react-icons/fa';
 import FileUpload from './FileUpload';
 import CreateFolder from './CreateFolder';
+import {truncateText} from '../utils'
 import './Header.css';
 
 const Header: React.FC = () => {
@@ -60,7 +61,7 @@ const Header: React.FC = () => {
     return (
         <div className="header">
             <div className="header-left">
-                <span className="google-drive-logo">GDrive</span>
+                <span className="google-drive-logo">Store</span>
                 <div className="search-container">
                     <FaSearch />
                     <input
@@ -75,7 +76,7 @@ const Header: React.FC = () => {
                             <ul>
                                 {searchResults.map((result, index) => (
                                     <li key={index}>
-                                        <span>{result.type === 'file' ? <FaFile /> : <FaFolder />}</span> {result.name}
+                                        <span>{result.type === 'file' ? <FaFile /> : <FaFolder />}</span> {truncateText(result.name, 15)}
                                         {result.type === 'file' && (
                                             <FaDownload 
                                                 className="download-icon" 

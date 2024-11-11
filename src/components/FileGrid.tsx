@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaFolder, FaFileAlt, FaDownload } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
+import {truncateText} from '../utils'
 import './FileGrid.css';
 
 interface FileItem {
@@ -52,7 +53,7 @@ const FileGrid: React.FC = () => {
     const handleFileDownload = (fileName: string) => {
         // Trigger file download by redirecting to the download endpoint
         window.location.href = `http://localhost:8080/download/${encodeURIComponent(fileName)}`;
-    };
+    };  
 
     return (
         <div className="file-grid">
@@ -77,7 +78,7 @@ const FileGrid: React.FC = () => {
                             />
                         </>
                     )}
-                    <p>{file.name}</p>
+                    <p>{truncateText(file.name, 15)}</p>
                 </div>
             ))}
         </div>
