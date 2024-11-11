@@ -1,0 +1,30 @@
+/* Ensure the body and html elements take full width and height */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Make sure the app root container takes up full height and width */
+.app {
+  display: flex;
+  flex-direction: column; /* Arrange header, sidebar, and content vertically */
+  height: 100%;
+  width: 100%;
+}
+
+/* Adjust the content area to also take up full width and height */
+.app-content {
+  display: flex;
+  height: 100%;  /* Take up full height of the screen */
+  width: 100%;   /* Take up full width of the screen */
+}
+
+/* Ensure the main content area takes the remaining space after sidebar */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
