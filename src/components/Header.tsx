@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch, FaFile, FaFolder } from 'react-icons/fa';
+import { FaSearch, FaFile, FaFolder, FaDownload } from 'react-icons/fa';
 import FileUpload from './FileUpload';
 import CreateFolder from './CreateFolder';
 import './Header.css';
@@ -51,6 +51,12 @@ const Header: React.FC = () => {
         fetchSearchResults();
     }, [searchQuery]);
 
+    // Handle file download
+    const handleFileDownload = (fileName: string) => {
+        // Trigger file download by redirecting to the download endpoint
+        window.location.href = `http://localhost:8080/download/${encodeURIComponent(fileName)}`;
+    };
+
     return (
         <div className="header">
             <div className="header-left">
@@ -63,19 +69,25 @@ const Header: React.FC = () => {
                         value={searchQuery}
                         onChange={handleSearchChange}
                     />
-                {/* Display search results */}
-                {searchResults.length > 0 && (
-                    <div className="search-results">
-                        <ul>
-                            {searchResults.map((result, index) => (
-                                <li key={index}>
-                                    <span>{result.type === 'file' ? <FaFile /> : <FaFolder />}</span> {result.name}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-                                </div>
+                    {/* Display search results */}
+                    {searchResults.length > 0 && (
+                        <div className="search-results">
+                            <ul>
+                                {searchResults.map((result, index) => (
+                                    <li key={index}>
+                                        <span>{result.type === 'file' ? <FaFile /> : <FaFolder />}</span> {result.name}
+                                        {result.type === 'file' && (
+                                            <FaDownload 
+                                                className="download-icon" 
+                                                onClick={() => handleFileDownload(result.name)} // Download file
+                                            />
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
             </div>
             <div className="header-right pr-10">
                 <button onClick={handleNewClick} className="new-button"><FaFile /> New File</button>

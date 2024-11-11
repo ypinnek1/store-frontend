@@ -43,3 +43,14 @@
 .back-button:hover {
     background-color: #e0e0e0;
 }
+
+.download-icon {
+    font-size: 20px;
+    color: #4CAF50; /* Green color */
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.download-icon:hover {
+    color: #388E3C;
+}

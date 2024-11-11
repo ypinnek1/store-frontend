@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaFolder, FaFileAlt } from 'react-icons/fa';
+import { FaFolder, FaFileAlt, FaDownload } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './FileGrid.css';
 
@@ -48,6 +48,12 @@ const FileGrid: React.FC = () => {
         navigate(`/${parentFolder || ''}`); // If no parent, go to the root
     };
 
+    // Handle file download
+    const handleFileDownload = (fileName: string) => {
+        // Trigger file download by redirecting to the download endpoint
+        window.location.href = `http://localhost:8080/download/${encodeURIComponent(fileName)}`;
+    };
+
     return (
         <div className="file-grid">
             {currentFolder && (
@@ -63,7 +69,13 @@ const FileGrid: React.FC = () => {
                             onClick={() => handleFolderClick(file.name)} // Open folder contents on click
                         />
                     ) : (
-                        <FaFileAlt className="file-icon" />
+                        <>
+                            <FaFileAlt className="file-icon" />
+                            <FaDownload 
+                                className="download-icon" 
+                                onClick={() => handleFileDownload(file.name)} // Download file
+                            />
+                        </>
                     )}
                     <p>{file.name}</p>
                 </div>

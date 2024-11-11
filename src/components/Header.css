@@ -118,3 +118,16 @@
 .search-results li span {
     margin-right: 5px;
 }
+
+/* Existing styles... */
+
+.download-icon {
+    font-size: 18px;
+    color: #4CAF50; /* Green color */
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.download-icon:hover {
+    color: #388E3C;
+}
