@@ -25,9 +25,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ closeModal, isModalOpen }) => {
       formData.append("folder", pathParts[0]);
 
       try {
-        const response = await fetch('http://localhost:8080/upload', {
+        const response = await fetch('https://aa8d-67-170-199-42.ngrok-free.app/upload', {
           method: 'POST',
           body: formData,
+          headers: {
+            'ngrok-skip-browser-warning': 'true'
+          }
         });
 
         if (response.ok) {

@@ -20,8 +20,12 @@ console.log(sidebarSelection)
     // Function to fetch files from the backend
     const fetchFiles = async (folder: string = '') => {
         try {
-            const url = folder ? `http://localhost:8080/files/${folder}?sortByDate=true` : 'http://localhost:8080/files?sortByDate=true'; // Handle subfolder
-            const response = await fetch(url);
+            const url = folder ? `https://aa8d-67-170-199-42.ngrok-free.app/files/${folder}?sortByDate=true` : 'https://aa8d-67-170-199-42.ngrok-free.app/files?sortByDate=true'; // Handle subfolder
+            const response = await fetch(url, {
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
             if (!response.ok) {
                 throw new Error('Failed to fetch files');
             }
@@ -52,7 +56,7 @@ console.log(sidebarSelection)
     // Handle file download
     const handleFileDownload = (fileName: string) => {
         // Trigger file download by redirecting to the download endpoint
-        window.location.href = `http://localhost:8080/download/${encodeURIComponent(fileName)}`;
+        window.location.href = `https://aa8d-67-170-199-42.ngrok-free.app/download/${encodeURIComponent(fileName)}`;
     };  
 
     return (

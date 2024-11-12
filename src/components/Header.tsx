@@ -37,7 +37,11 @@ const Header: React.FC = () => {
 
         const fetchSearchResults = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/search?q=${encodeURIComponent(searchQuery)}`);
+                const response = await fetch(`https://aa8d-67-170-199-42.ngrok-free.app/search?q=${encodeURIComponent(searchQuery)}`, {
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true'
+                    }
+                });
                 if (response.ok) {
                     const data = await response.json();
                     setSearchResults(data);
@@ -55,7 +59,7 @@ const Header: React.FC = () => {
     // Handle file download
     const handleFileDownload = (fileName: string) => {
         // Trigger file download by redirecting to the download endpoint
-        window.location.href = `http://localhost:8080/download/${encodeURIComponent(fileName)}`;
+        window.location.href = `https://aa8d-67-170-199-42.ngrok-free.app/download/${encodeURIComponent(fileName)}`;
     };
 
     return (

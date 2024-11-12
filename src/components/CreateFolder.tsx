@@ -23,7 +23,7 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({ isOpen, onClose }
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/createFolder/${folderName}`, {
+      const response = await fetch(`https://aa8d-67-170-199-42.ngrok-free.app/createFolder/${folderName}`, {
         method: 'POST',
       });
 
